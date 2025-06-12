@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-09-27",
-  ssr: true,
+  ssr: false,
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxt/icon",
@@ -10,6 +10,8 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxt/image",
     "@formkit/auto-animate/nuxt",
+    "@nuxt/content",
+    ,
   ],
   icon: {
     clientBundle: {

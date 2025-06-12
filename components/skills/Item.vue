@@ -16,3 +16,15 @@ defineProps<{
     {{ item.name }}
   </li>
 </template>
+
+<style lang="scss">
+.tech-item {
+  @apply cursor-pointer transition-all duration-300 ease-in-out;
+
+  &:hover {
+    @apply border border-violet-500;
+
+    filter: brightness(1.2);
+  }
+}
+</style>
