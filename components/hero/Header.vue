@@ -23,7 +23,8 @@ const toggleDrawerOpen = () => {
 
 <template>
   <header class="w-full flex flex-row items-center justify-between">
-    <nuxt-link to="/">
+    <nuxt-link to="/" class="flex items-center gap-3">
+      <img src="/logo.svg" alt="" width="36" height="36" class="w-9 h-9" />
       <h1 class="logo-font [&_*]:text-2xl">
         <span class="text-primary-500">Ícaro</span>&nbsp;<span
           class="text-secondary-500"

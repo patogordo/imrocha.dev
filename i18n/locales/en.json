@@ -12,7 +12,7 @@
       "title": "Knowledge and Experience",
       "description": {
         "education-and-experience-intro": "I'm graduating in Software Engineering at",
-        "education-and-experience-details": "and currently working in a local growing company as a Software Engineer, in my daily working I usually use the JavaScript programming language, that I have a bigger experience, I also use frameworks like Vue, Nuxt, React, Next and databases like PostgresSQL, MySQL and MongoDB."
+        "education-and-experience-details": "and today I work as Technology Director at AltPay and as a Software Engineer at B91, both in the payments market. Day to day I mostly use JavaScript/TypeScript and its ecosystem, with frameworks like NestJS, Nitro, Express, Vue, Nuxt, React and Next.js, and databases like PostgreSQL, MySQL and MongoDB. I also build native Android apps for card terminals with Kotlin and Jetpack Compose, along with TEF and Pix integrations."
       }
     }
   },
@@ -29,12 +29,20 @@
     "contact-me": "Contact me",
     "photo-alt": "My photo, using a gray t shirt and using sun glasses"
   },
-  "work-in-progress": "Work in Progress",
   "projects": {
     "title": "My projects",
     "description": "Here is the list of the projects that I'm much satisfied with the results, some of them I made to learn something new and other ones I made to get earning form it.",
     "icons-alt": "{project_name} icon",
     "preview-alt": "{project_name} preview",
+    "flaggleversus": {
+      "description": "Flaggle Versus is a flag guessing game I built mobile first. You can play solo in six modes (like Mosaic, Fog and Silhouette), open a room and challenge your friends in real time, compete in the daily challenge ranking or practice with spaced repetition flash cards. I built the whole thing with Nuxt and Nitro, MongoDB and Ably for the real time matches, with tests in Vitest and Playwright. The answer never reaches the browser before it should, so there's no way to cheat."
+    },
+    "tonebook": {
+      "description": "Tonebook came from something I wanted for myself: getting the tones of the songs I like into my LIVTRA NanoCore pedal without spending hours turning knobs. It talks to the pedal straight from the browser through Web MIDI. You pick a song, the tone is sent right away, and you can tweak every effect while playing, name the preset and save it on the pedal. To get there I studied the MIDI guide and reverse engineered the SysEx commands the official app uses. It can also record the tab with your camera and the pedal's sound."
+    },
+    "easyfinance": {
+      "description": "Easy Finance is a personal finance app for Android and iOS. A short step by step setup asks for your budgets, fixed costs, variable costs and goals, then the app shows how much of each budget is already spent and reminds you of upcoming bills with push notifications. I built it with Nuxt and Capacitor, sign in with Google, GitHub and Microsoft through Firebase, and its own API in Nitro with Prisma."
+    },
     "pontodigital": {
       "description": "PontoDigital is an innovative platform for employee time tracking. It allows real-time monitoring of in-person, remote, and hybrid teams with detailed reports and customization. Offering API integration, data security, and dedicated support for businesses of all sizes."
     },
@@ -95,8 +103,22 @@
     "mobile": {
       "title": "Mobile"
     },
+    "payments": {
+      "title": "Payments"
+    },
     "miscellaneous": {
       "title": "Miscellaneous"
     }
+  },
+  "github-activity": {
+    "title": "GitHub activity",
+    "description": "{total} contributions in the last year, between work and side projects",
+    "tooltip": "No contributions on {date} | 1 contribution on {date} | {count} contributions on {date}",
+    "see-profile": "See my GitHub profile",
+    "less": "Less",
+    "more": "More"
+  },
+  "footer": {
+    "back-to-top": "Back to top"
   }
 }

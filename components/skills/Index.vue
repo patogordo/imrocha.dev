@@ -16,6 +16,18 @@ const backendStack: Stack[] = [
     name: "TypeScript",
   },
   {
+    icon: h(Icon, { name: "logos:nodejs-icon" }),
+    name: "Node.js",
+  },
+  {
+    icon: h(Icon, { name: "unjs:nitro" }),
+    name: "Nitro",
+  },
+  {
+    icon: h(Icon, { name: "simple-icons:express", class: "text-white" }),
+    name: "Express",
+  },
+  {
     icon: h(Icon, { name: "logos:nestjs" }),
     name: "Nest",
   },
@@ -24,12 +36,16 @@ const backendStack: Stack[] = [
     name: "Prisma",
   },
   {
+    icon: h(Icon, { name: "simple-icons:typeorm", class: "text-red-500" }),
+    name: "TypeORM",
+  },
+  {
     icon: h(Icon, { name: "skill-icons:mysql-dark" }),
     name: "MySQL",
   },
   {
     icon: h(Icon, { name: "logos:postgresql" }),
-    name: "PostgresSQL",
+    name: "PostgreSQL",
   },
   {
     icon: h(Icon, { name: "logos:mongodb-icon" }),
@@ -40,12 +56,16 @@ const backendStack: Stack[] = [
     name: "Redis",
   },
   {
-    icon: h(Icon, { name: "skill-icons:docker" }),
-    name: "Docker",
+    icon: h(Icon, { name: "logos:rabbitmq-icon" }),
+    name: "RabbitMQ",
   },
   {
-    icon: h(Icon, { name: "logos:aws-s3", class: "rounded-md" }),
-    name: "AWS S3",
+    icon: h(Icon, { name: "simple-icons:mqtt", class: "text-violet-400" }),
+    name: "MQTT",
+  },
+  {
+    icon: h(Icon, { name: "skill-icons:docker" }),
+    name: "Docker",
   },
   {
     icon: h(Icon, { name: "carbon:microservices-1", class: "text-blue-500" }),
@@ -58,6 +78,14 @@ const backendStack: Stack[] = [
   {
     icon: h(Icon, { name: "logos:swagger" }),
     name: "OpenAPI",
+  },
+  {
+    icon: h(Icon, { name: "tabler:broadcast", class: "text-orange-500" }),
+    name: "WebSockets",
+  },
+  {
+    icon: h(Icon, { name: "simple-icons:stripe", class: "text-indigo-400" }),
+    name: "Stripe",
   },
 ];
 
@@ -83,6 +111,18 @@ const frontendStack: Stack[] = [
     icon: h(Icon, { name: "logos:tailwindcss-icon" }),
     name: "Tailwind",
   },
+  {
+    icon: h(Icon, { name: "logos:pinia" }),
+    name: "Pinia",
+  },
+  {
+    icon: h(Icon, { name: "simple-icons:shadcnui", class: "text-white" }),
+    name: "shadcn/ui",
+  },
+  {
+    icon: h(Icon, { name: "simple-icons:pwa", class: "text-violet-400" }),
+    name: "PWA",
+  },
 ];
 
 // Mobile stack
@@ -92,6 +132,14 @@ const mobileStack: Stack[] = [
     name: "Android",
   },
   {
+    icon: h(Icon, { name: "logos:kotlin-icon" }),
+    name: "Kotlin",
+  },
+  {
+    icon: h(Icon, { name: "devicon:jetpackcompose" }),
+    name: "Jetpack Compose",
+  },
+  {
     icon: h(Icon, { name: "logos:react" }),
     name: "React Native",
   },
@@ -99,10 +147,26 @@ const mobileStack: Stack[] = [
     icon: h(Icon, { name: "simple-icons:expo", class: "text-white" }),
     name: "Expo",
   },
+  {
+    icon: h(Icon, { name: "devicon:capacitor" }),
+    name: "Capacitor",
+  },
+  {
+    icon: h(Icon, { name: "logos:firebase-icon" }),
+    name: "Firebase",
+  },
 ];
 
 // Miscellaneous
 const miscellaneousStack: Stack[] = [
+  {
+    icon: h(Icon, { name: "simple-icons:amazonwebservices", class: "text-orange-400" }),
+    name: "AWS",
+  },
+  {
+    icon: h(Icon, { name: "logos:cloudflare-icon" }),
+    name: "Cloudflare",
+  },
   {
     icon: h(Icon, { name: "logos:git-icon" }),
     name: "Git Flow",
@@ -122,6 +186,10 @@ const miscellaneousStack: Stack[] = [
     icon: h(Icon, { name: "devicon:vitest" }),
     name: "Vitest",
   },
+  {
+    icon: h(Icon, { name: "logos:playwright" }),
+    name: "Playwright",
+  },
 
   {
     icon: h(Icon, { name: "devicon:githubactions" }),
@@ -130,6 +198,30 @@ const miscellaneousStack: Stack[] = [
   {
     icon: h(Icon, { name: "logos:opentelemetry-icon" }),
     name: "Observability",
+  },
+  {
+    icon: h(Icon, { name: "simple-icons:sentry", class: "text-violet-400" }),
+    name: "Sentry",
+  },
+];
+
+// Payments
+const paymentsStack: Stack[] = [
+  {
+    icon: h(Icon, { name: "simple-icons:pix", class: "text-teal-400" }),
+    name: "Pix",
+  },
+  {
+    icon: h(Icon, { name: "tabler:credit-card", class: "text-sky-400" }),
+    name: "TEF",
+  },
+  {
+    icon: h(Icon, { name: "tabler:shield-lock", class: "text-emerald-400" }),
+    name: "PCI DSS",
+  },
+  {
+    icon: h(Icon, { name: "tabler:lock-check", class: "text-amber-400" }),
+    name: "SSL Pinning",
   },
 ];
 
@@ -145,6 +237,10 @@ const stacks = [
   {
     name: "mobile",
     items: mobileStack,
+  },
+  {
+    name: "payments",
+    items: paymentsStack,
   },
   {
     name: "miscellaneous",

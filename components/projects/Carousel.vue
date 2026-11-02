@@ -5,7 +5,37 @@ const { t } = useI18n();
 
 const active = ref(0);
 
+const languageInfo: Record<string, { flag: string; name: string }> = {
+  en: { flag: "circle-flags:us", name: "English" },
+  pt: { flag: "circle-flags:br", name: "Português" },
+  es: { flag: "circle-flags:es", name: "Español" },
+};
+
 const items = computed(() => [
+  {
+    name: "Flaggle Versus",
+    imgUrl: "/images/flaggleversus-preview.jpg",
+    iconUrl: "/images/flaggleversus-icon.png",
+    description: t("projects.flaggleversus.description"),
+    languages: ["pt", "en", "es"],
+    livePreview: "https://flaggle-versus.vercel.app",
+  },
+  {
+    name: "Tonebook",
+    imgUrl: "/images/tonebook-preview.jpg",
+    iconUrl: "/images/tonebook-icon.png",
+    description: t("projects.tonebook.description"),
+    languages: ["pt"],
+    sourceCode: "https://github.com/patogordo/Tonebook",
+    livePreview: "https://patogordo.github.io/Tonebook/",
+  },
+  {
+    name: "Easy Finance",
+    imgUrl: "/images/easyfinance-preview.jpg",
+    iconUrl: "/images/easyfinance-icon.png",
+    description: t("projects.easyfinance.description"),
+    languages: ["pt"],
+  },
   {
     name: "PontoDigital",
     imgUrl: "/images/pontodigital-preview.png",
@@ -111,20 +141,15 @@ const items = computed(() => [
               </p>
 
               <div
+                v-for="(code, i) in item.languages"
+                :key="code"
                 class="flex items-center justify-start gap-2"
-                v-if="item.languages.includes('en')"
               >
-                <Icon name="circle-flags:us" size="20" />
-                <span class="font-bold"> English </span>
-              </div>
-              <!-- I hope not learning a new language too early -->
-              <span v-if="item.languages.length >= 2" class="-ml-2">,</span>
-              <div
-                class="flex items-center justify-start gap-2"
-                v-if="item.languages.includes('pt')"
-              >
-                <Icon name="circle-flags:br" size="20" />
-                <span class="font-bold"> Português </span>
+                <Icon :name="languageInfo[code].flag" size="20" />
+                <span class="font-bold"
+                  >{{ languageInfo[code].name
+                  }}{{ i < item.languages.length - 1 ? "," : "" }}</span
+                >
               </div>
             </div>
 

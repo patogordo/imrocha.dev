@@ -2,6 +2,16 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-09-27",
   ssr: false,
+  app: {
+    head: {
+      link: [
+        { rel: "icon", type: "image/svg+xml", href: "/logo.svg" },
+        { rel: "icon", sizes: "48x48", href: "/favicon.ico" },
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      ],
+      meta: [{ name: "theme-color", content: "#22272e" }],
+    },
+  },
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxt/icon",
@@ -11,8 +21,11 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@formkit/auto-animate/nuxt",
     "@nuxt/content",
-    ,
   ],
+  // node:sqlite (Node 22.5+) instead of installing better-sqlite3
+  content: {
+    experimental: { sqliteConnector: "native" },
+  },
   icon: {
     clientBundle: {
       scan: true,
@@ -35,7 +48,7 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       fallbackLocale: "en",
     },
-    langDir: "./i18n/locales",
+    langDir: "locales",
     locales: [
       {
         code: "en",
@@ -48,6 +61,6 @@ export default defineNuxtConfig({
         file: "pt.json",
       },
     ],
-    vueI18n: "./i18n/config.ts",
+    vueI18n: "config.ts",
   },
 });
