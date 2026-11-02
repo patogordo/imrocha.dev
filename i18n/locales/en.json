@@ -12,7 +12,7 @@
       "title": "Knowledge and Experience",
       "description": {
         "education-and-experience-intro": "I'm graduating in Software Engineering at",
-        "education-and-experience-details": "and today I work as Technology Director at AltPay and as a Software Engineer at B91, both in the payments market. Day to day I mostly use JavaScript/TypeScript and its ecosystem, with frameworks like NestJS, Nitro, Express, Vue, Nuxt, React and Next.js, and databases like PostgreSQL, MySQL and MongoDB. I also build native Android apps for card terminals with Kotlin and Jetpack Compose, along with TEF and Pix integrations."
+        "education-and-experience-details": "and today I work as Technology Director at AltPay and as a Software Engineer at B91, in the payments market. Day to day I use JavaScript/TypeScript with NestJS, Nitro, Vue, Nuxt, React and Next.js, databases like PostgreSQL, MySQL and MongoDB, and I build native Android apps for card terminals with Kotlin and Jetpack Compose."
       }
     }
   },
@@ -35,13 +35,13 @@
     "icons-alt": "{project_name} icon",
     "preview-alt": "{project_name} preview",
     "flaggleversus": {
-      "description": "Flaggle Versus is a flag guessing game I built mobile first. You can play solo in six modes (like Mosaic, Fog and Silhouette), open a room and challenge your friends in real time, compete in the daily challenge ranking or practice with spaced repetition flash cards. I built the whole thing with Nuxt and Nitro, MongoDB and Ably for the real time matches, with tests in Vitest and Playwright. The answer never reaches the browser before it should, so there's no way to cheat."
+      "description": "Flaggle Versus is a flag guessing game made for phones. You can play solo in six modes, challenge friends in real time or compete in the daily challenge ranking. Built with Nuxt, Nitro, MongoDB and Ably."
     },
     "tonebook": {
-      "description": "Tonebook came from something I wanted for myself: getting the tones of the songs I like into my LIVTRA NanoCore pedal without spending hours turning knobs. It talks to the pedal straight from the browser through Web MIDI. You pick a song, the tone is sent right away, and you can tweak every effect while playing, name the preset and save it on the pedal. To get there I studied the MIDI guide and reverse engineered the SysEx commands the official app uses. It can also record the tab with your camera and the pedal's sound."
+      "description": "Tonebook sends the tones of well known songs to the LIVTRA NanoCore pedal straight from the browser, using Web MIDI. You can tweak every effect while playing and save the preset on the pedal, with SysEx commands I reverse engineered."
     },
     "easyfinance": {
-      "description": "Easy Finance is a personal finance app for Android and the web. You set up your month in a short step by step flow (budgets, fixed costs, variable costs and goals), and the dashboard shows the expected balance, how much of each budget is already spent and the upcoming bills, with push notification reminders. You can put money into your goals and import your bank statement as OFX, reviewing the entries first and skipping anything already imported. I built the app and the API in the same Nuxt project, with MongoDB, accounts with Better Auth (email, Google and GitHub), notifications through Firebase, an admin panel and the Android app with Capacitor."
+      "description": "Easy Finance is a personal finance app for Android and the web. You add budgets, costs and goals, follow the month's expected balance and import your bank statement as OFX. I built the app and the API in the same Nuxt project, with MongoDB and Capacitor."
     },
     "pontodigital": {
       "description": "PontoDigital is an innovative platform for employee time tracking. It allows real-time monitoring of in-person, remote, and hybrid teams with detailed reports and customization. Offering API integration, data security, and dedicated support for businesses of all sizes."
@@ -88,8 +88,7 @@
         "description": "Thank you for your contact! Soon you will receive a reply in your email."
       }
     },
-    "prefer-another-contact-method": "Prefer contacting me using another method?",
-    "direct-email": "Direct email"
+    "prefer-another-contact-method": "Prefer contacting me using another method?"
   },
   "skills": {
     "title": "My Skills",

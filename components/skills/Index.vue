@@ -266,7 +266,7 @@ const stacks = [
       <h3 class="text-lg mb-2">{{ $t(`skills.${stack.name}.title`) }}</h3>
 
       <ul
-        class="w-full flex flex-row flex-wrap items-center justify-start max-sm:grid max-sm:grid-cols-2 gap-4 mt-4"
+        class="w-full flex flex-row flex-wrap items-center justify-start gap-4 max-sm:gap-2 mt-4"
       >
         <SkillsItem :stack-items="stack.items" />
       </ul>

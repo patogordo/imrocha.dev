@@ -52,11 +52,9 @@ import { appConfig } from "~/config/app";
         rel="noopener noreferrer"
       >
         <Icon name="uil:envelope-alt" size="24" />
-        <span class="font-semibold underline underline-offset-2"
-          >{{ $t("contact-me.direct-email") }} ({{
-            appConfig.contactMailAddress
-          }})</span
-        >
+        <span class="font-semibold underline underline-offset-2">{{
+          appConfig.contactMailAddress
+        }}</span>
       </a>
     </div>
   </section>

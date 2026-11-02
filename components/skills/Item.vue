@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <li
-    class="tech-item bg-base-200 px-3 py-1.5 border border-base-100 rounded-lg flex items-center justify-center gap-2"
+    class="tech-item bg-base-200 px-3 py-1.5 border border-base-100 rounded-lg flex items-center justify-center gap-2 whitespace-nowrap"
     v-for="(item, index) in stackItems"
     :key="index"
   >

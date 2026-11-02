@@ -10,7 +10,7 @@
     },
     "knowledge-and-experience": {
       "description": {
-        "education-and-experience-details": "e hoje atuo como Diretor de Tecnologia na AltPay e como Engenheiro de Software na B91, as duas no mercado de meios de pagamento. No dia a dia uso principalmente JavaScript/TypeScript e seu ecossistema, com frameworks como NestJS, Nitro, Express, Vue, Nuxt, React e Next.js, e bancos de dados como PostgreSQL, MySQL e MongoDB. Também desenvolvo apps Android nativos para máquinas de cartão com Kotlin e Jetpack Compose, junto com integrações TEF e Pix.",
+        "education-and-experience-details": "e hoje atuo como Diretor de Tecnologia na AltPay e como Engenheiro de Software na B91, no mercado de meios de pagamento. No dia a dia uso JavaScript/TypeScript com NestJS, Nitro, Vue, Nuxt, React e Next.js, bancos como PostgreSQL, MySQL e MongoDB, e desenvolvo apps Android nativos para máquinas de cartão com Kotlin e Jetpack Compose.",
         "education-and-experience-intro": "Eu estou me graduando em Engenharia de Software na"
       },
       "title": "Conhecimento e Experiência"
@@ -34,13 +34,13 @@
     "icons-alt": "Ícone do projeto {project_name}",
     "preview-alt": "Prévia do projeto {project_name}",
     "flaggleversus": {
-      "description": "O Flaggle Versus é um jogo de adivinhar bandeiras que eu fiz pensando primeiro no celular. Dá para jogar sozinho em seis modos (como Mosaico, Neblina e Silhueta), abrir uma sala e desafiar os amigos em tempo real, disputar o ranking do desafio diário ou treinar com flash cards de repetição espaçada. Fiz tudo com Nuxt e Nitro, MongoDB e Ably para as partidas em tempo real, com testes em Vitest e Playwright. A resposta nunca chega ao navegador antes da hora, então não tem como trapacear."
+      "description": "O Flaggle Versus é um jogo de adivinhar bandeiras feito para o celular. Dá para jogar sozinho em seis modos, desafiar os amigos em tempo real ou disputar o ranking do desafio diário. Fiz com Nuxt, Nitro, MongoDB e Ably."
     },
     "tonebook": {
-      "description": "O Tonebook nasceu de uma vontade minha: tirar o timbre das músicas que eu gosto na minha pedaleira LIVTRA NanoCore sem passar horas girando botão. Ele conversa com o pedal direto pelo navegador, via Web MIDI. Você escolhe a música, o timbre vai na hora e dá para ajustar cada efeito tocando, dar nome ao preset e salvar no pedal. Para chegar nisso, estudei o guia de MIDI e fiz engenharia reversa dos comandos SysEx que o app oficial usa. Também grava a tela com a câmera e o som do pedal."
+      "description": "O Tonebook leva o timbre de músicas conhecidas para a pedaleira LIVTRA NanoCore direto do navegador, via Web MIDI. Dá para ajustar cada efeito enquanto toca e salvar o preset no pedal, com comandos SysEx que descobri por engenharia reversa."
     },
     "easyfinance": {
-      "description": "O Easy Finance é um app de finanças pessoais para Android e navegador. Você monta o mês num passo a passo curto (orçamentos, custos fixos, custos variáveis e metas) e o painel mostra o saldo previsto, quanto já saiu de cada orçamento e as próximas contas, com aviso por notificação. Dá para guardar dinheiro nas metas e importar o extrato do banco em OFX, conferindo os lançamentos antes e sem duplicar o que já foi importado. Fiz o app e a API no mesmo projeto Nuxt, com MongoDB, contas com Better Auth (e-mail, Google e GitHub), notificações pelo Firebase, painel de administração e o app Android com Capacitor."
+      "description": "O Easy Finance é um app de finanças pessoais para Android e navegador. Você cadastra orçamentos, custos e metas, acompanha o saldo previsto do mês e importa o extrato do banco em OFX. Fiz o app e a API no mesmo projeto Nuxt, com MongoDB e Capacitor."
     },
     "pontodigital": {
       "description": "O PontoDigital é uma plataforma inovadora para gestão de ponto. Ela permite monitorar equipes presenciais, remotas e híbridas em tempo real, com relatórios detalhados e personalização. Oferece integração via API, segurança e suporte dedicado para empresas de todos os portes."
@@ -88,8 +88,7 @@
         "description": "Obrigado pelo seu contato! Em breve você receberá uma resposta em seu email"
       }
     },
-    "prefer-another-contact-method": "Prefere entrar em contato de outra forma?",
-    "direct-email": "Email direto"
+    "prefer-another-contact-method": "Prefere entrar em contato de outra forma?"
   },
   "skills": {
     "title": "Minhas Habilidades",

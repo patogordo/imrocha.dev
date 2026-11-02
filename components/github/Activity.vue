@@ -63,7 +63,10 @@ watch(days, async () => {
     <div
       class="w-full max-w-fit mt-8 p-4 bg-base-300 border-2 border-base-100 rounded-lg"
     >
-      <div ref="scroller" class="overflow-x-auto pb-2">
+      <div
+        ref="scroller"
+        class="overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
         <ol
           class="grid grid-rows-7 grid-flow-col gap-[3px] w-max"
           :aria-label="$t('github-activity.title')"
