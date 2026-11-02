@@ -35,6 +35,7 @@ const items = computed(() => [
     iconUrl: "/images/easyfinance-icon.png",
     description: t("projects.easyfinance.description"),
     languages: ["pt"],
+    livePreview: "https://easyfinance-app.vercel.app",
   },
   {
     name: "PontoDigital",
