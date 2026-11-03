@@ -53,5 +53,7 @@ const date = computed(() =>
     </p>
 
     <ContentRenderer :value="page" class="prose-content mt-10" />
+
+    <BlogToc v-if="page.body?.toc?.links" :links="page.body.toc.links" />
   </article>
 </template>
