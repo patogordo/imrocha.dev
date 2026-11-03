@@ -29,8 +29,12 @@ const formatDate = (date?: string) =>
       <article
         class="group relative p-5 bg-base-200 border-2 border-base-100 rounded-lg transition-colors hover:border-primary-500"
       >
-        <p class="text-sm">
-          <time :datetime="post.date">{{ formatDate(post.date) }}</time>
+        <p class="text-sm transition-colors group-hover:!text-secondary-400">
+          <time
+            :datetime="post.date"
+            class="transition-colors group-hover:!text-secondary-400"
+            >{{ formatDate(post.date) }}</time
+          >
           <template v-if="locale !== 'pt'">
             · {{ $t("blog.written-in-pt") }}
           </template>

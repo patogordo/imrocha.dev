@@ -67,6 +67,20 @@ async function buildSeo(event: H3Event): Promise<Seo> {
   const text = TEXT[lang];
   const path = getRequestURL(event).pathname.replace(/\/+$/, "") || "/";
 
+  if (path === "/blog/editor") {
+    return {
+      lang,
+      title: lang === "pt" ? "Editor de Markdown · Ícaro Rocha" : "Markdown editor · Ícaro Rocha",
+      description:
+        lang === "pt"
+          ? "Escreva em Markdown e veja na hora como o post fica no blog."
+          : "Write Markdown and see right away how the post looks on the blog.",
+      path,
+      type: "website",
+      jsonLd: { "@context": "https://schema.org", "@type": "WebApplication", name: "Markdown editor", url: `${SITE}${path}`, author: PERSON },
+    };
+  }
+
   if (path.startsWith("/blog/tags/")) {
     const tag = decodeURIComponent(path.slice("/blog/tags/".length));
     return {

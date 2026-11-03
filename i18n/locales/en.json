@@ -147,6 +147,20 @@
     "export-pdf": "Export PDF",
     "all-posts": "All posts",
     "tag-title": "Posts tagged",
-    "tag-count": "No posts with this tag. | 1 post, newest first. | {count} posts, newest first."
+    "tag-count": "No posts with this tag. | 1 post, newest first. | {count} posts, newest first.",
+    "open-editor": "Open the Markdown editor"
+  },
+  "editor": {
+    "title": "Markdown editor",
+    "description": "Write Markdown and see right away how the post looks on the blog. The draft is saved in this browser.",
+    "write": "Write",
+    "preview": "Preview",
+    "copy-ai": "Copy AI writing instructions",
+    "copied-ai": "Instructions copied",
+    "reset": "Restore sample",
+    "reset-confirm": "Replace the current draft with the sample? The current text will be lost.",
+    "parse-error": "Could not read the frontmatter. Check the syntax between the two ---.",
+    "empty": "Write something on the left to see the preview.",
+    "placeholder": "Write your post in Markdown..."
   }
 }

@@ -147,6 +147,20 @@
     "export-pdf": "Exportar PDF",
     "all-posts": "Todos os posts",
     "tag-title": "Posts com a tag",
-    "tag-count": "Nenhum post com essa tag. | 1 post, do mais recente para o mais antigo. | {count} posts, do mais recente para o mais antigo."
+    "tag-count": "Nenhum post com essa tag. | 1 post, do mais recente para o mais antigo. | {count} posts, do mais recente para o mais antigo.",
+    "open-editor": "Abrir o editor de Markdown"
+  },
+  "editor": {
+    "title": "Editor de Markdown",
+    "description": "Escreva em Markdown e veja na hora como o post fica no blog. O rascunho fica salvo neste navegador.",
+    "write": "Escrever",
+    "preview": "Visualizar",
+    "copy-ai": "Copiar instruções para IA",
+    "copied-ai": "Instruções copiadas",
+    "reset": "Restaurar exemplo",
+    "reset-confirm": "Trocar o rascunho atual pelo exemplo? O texto atual vai ser perdido.",
+    "parse-error": "Não deu para ler o frontmatter. Confira a sintaxe entre os dois ---.",
+    "empty": "Escreva algo à esquerda para ver a prévia.",
+    "placeholder": "Escreva seu post em Markdown..."
   }
 }
