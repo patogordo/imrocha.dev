@@ -19,7 +19,8 @@
   "header": {
     "about": "Sobre mim",
     "contact-me": "Contate me",
-    "projects": "Projetos"
+    "projects": "Projetos",
+    "blog": "Blog"
   },
   "profile": {
     "contact-me": "Contate me",
@@ -119,5 +120,26 @@
   },
   "footer": {
     "back-to-top": "Voltar ao topo"
+  },
+  "experience": {
+    "title": "Experiência",
+    "present": "atual",
+    "see-more": "Ver mais no LinkedIn",
+    "roles": {
+      "cto": "Diretor de Tecnologia",
+      "engineer": "Engenheiro de Software",
+      "developer": "Desenvolvedor de Software",
+      "intern": "Estagiário de Desenvolvimento"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Escrevo aqui sobre o que aprendo nos meus projetos e no trabalho, quase sempre sobre back-end, Nuxt e Nitro.",
+    "empty": "Nenhum post por enquanto.",
+    "back": "Voltar para o blog",
+    "read-more": "Ler post",
+    "written-in-pt": "Escrito em português",
+    "copy": "Copiar",
+    "copied": "Copiado"
   }
 }

@@ -30,5 +30,7 @@
         />)</a
       >, {{ $t("about.knowledge-and-experience.description.education-and-experience-details") }}
     </p>
+
+    <HeroExperience />
   </div>
 </template>

@@ -64,7 +64,11 @@ const toggleDrawerOpen = () => {
         <nuxt-link
           to="/#about"
           @click="closeDrawer"
-          :class="isActive('') || isActive('about') ? '!text-primary-500' : ''"
+          :class="
+            (route.path === '/' && isActive('')) || isActive('about')
+              ? '!text-primary-500'
+              : ''
+          "
           class="font-semibold"
         >
           {{ $t("header.about") }}
@@ -88,6 +92,16 @@ const toggleDrawerOpen = () => {
           class="font-semibold"
         >
           {{ $t("header.contact-me") }}
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link
+          to="/blog"
+          @click="closeDrawer"
+          :class="route.path.startsWith('/blog') ? '!text-primary-500' : ''"
+          class="font-semibold"
+        >
+          {{ $t("header.blog") }}
         </nuxt-link>
       </li>
       <li>

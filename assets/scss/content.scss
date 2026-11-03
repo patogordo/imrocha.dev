@@ -1,0 +1,267 @@
+// Markdown rendered by Nuxt Content (blog posts).
+// Layout inspired by Stoplight's docs: calm body text, framed code with a header,
+// callouts with a colored bar, bordered tables. Colors are the site's own.
+
+.prose-content {
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --code-bg: #1c2128;
+
+  @apply w-full text-[1rem] leading-7;
+
+  > * + * {
+    @apply mt-5;
+  }
+
+  // Headings
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold text-white scroll-mt-8;
+  }
+
+  h1 {
+    @apply text-3xl mt-12;
+  }
+
+  h2 {
+    @apply text-2xl mt-12 pb-2 border-b border-base-100;
+  }
+
+  h3 {
+    @apply text-xl mt-10;
+    color: #e4e5eb;
+  }
+
+  h4 {
+    @apply text-lg mt-8;
+  }
+
+  h5,
+  h6 {
+    @apply text-[1rem] mt-6;
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) > a {
+    @apply relative no-underline;
+    color: inherit;
+    font-weight: inherit;
+
+    &::before {
+      content: "#";
+      @apply absolute -left-6 opacity-0 transition-opacity text-primary-500;
+    }
+
+    &:hover::before {
+      @apply opacity-100;
+    }
+  }
+
+  // Text
+  p,
+  li,
+  td,
+  th {
+    @apply leading-7;
+  }
+
+  strong {
+    @apply font-bold text-white;
+  }
+
+  em {
+    @apply italic;
+  }
+
+  del {
+    @apply line-through opacity-70;
+  }
+
+  a:not(.code-block-copy) {
+    @apply text-primary-400 underline underline-offset-4 decoration-primary-800 transition-colors;
+
+    &:hover {
+      @apply text-primary-300 decoration-primary-400;
+    }
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) > a:not(.code-block-copy) {
+    @apply no-underline;
+    color: inherit;
+  }
+
+  // Lists
+  ul,
+  ol {
+    @apply pl-6;
+
+    li + li,
+    li > ul,
+    li > ol {
+      @apply mt-2;
+    }
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li::marker {
+    @apply text-primary-500 font-bold;
+  }
+
+  // GFM task list
+  ul:has(> li > input[type="checkbox"]) {
+    @apply list-none pl-1;
+  }
+
+  li > input[type="checkbox"] {
+    @apply mr-2 w-4 h-4 align-[-3px];
+    accent-color: var(--primary-500);
+  }
+
+  // Inline code
+  :not(pre) > code {
+    @apply px-1.5 py-0.5 rounded-md border border-base-100 bg-base-200 text-[0.875em] text-secondary-300;
+    font-family: var(--mono);
+  }
+
+  kbd {
+    @apply px-1.5 py-0.5 rounded-md border border-b-2 border-base-100 bg-base-200 text-[0.8em];
+    font-family: var(--mono);
+  }
+
+  // Code blocks (ProsePre)
+  .code-block {
+    @apply rounded-lg border border-base-100 overflow-hidden;
+    background: var(--code-bg);
+  }
+
+  .code-block-header {
+    @apply flex items-center justify-between gap-4 px-4 py-2 bg-base-200 border-b border-base-100 text-xs;
+
+    > span {
+      @apply font-semibold;
+      font-family: var(--mono);
+    }
+  }
+
+  .code-block-copy {
+    @apply flex items-center gap-1 px-2 py-1 rounded-md transition-colors;
+
+    &:hover {
+      @apply bg-base-100 text-white;
+    }
+  }
+
+  pre {
+    @apply overflow-x-auto p-4 text-sm leading-6;
+    background: var(--code-bg) !important;
+
+    &,
+    * {
+      font-family: var(--mono);
+    }
+  }
+
+  // Blockquote
+  blockquote {
+    @apply pl-4 py-1 border-l-4 border-secondary-500 italic;
+
+    p {
+      @apply text-white/80;
+    }
+  }
+
+  // Callout (components/content/Alert.vue)
+  .callout {
+    --tone: var(--secondary-400);
+
+    @apply px-4 py-3 rounded-lg border-l-4;
+    border-color: var(--tone);
+    background: color-mix(in srgb, var(--tone) 8%, transparent);
+
+    &.success {
+      --tone: var(--primary-500);
+    }
+
+    &.warning {
+      --tone: var(--warning-500);
+    }
+
+    &.error {
+      --tone: var(--error-500);
+    }
+
+    .callout-title {
+      @apply flex items-center gap-2 font-bold mb-1;
+      color: var(--tone);
+
+      * {
+        color: var(--tone);
+      }
+    }
+
+    .callout-body > * + * {
+      @apply mt-3;
+    }
+  }
+
+  // Tables (ProseTable)
+  .table-wrapper {
+    @apply overflow-x-auto rounded-lg border border-base-100;
+  }
+
+  table {
+    @apply w-full text-sm text-left border-collapse;
+  }
+
+  th {
+    @apply px-4 py-2 bg-base-200 font-bold text-white whitespace-nowrap border-b border-base-100;
+  }
+
+  td {
+    @apply px-4 py-2 border-b border-base-100 align-top;
+
+    // Code in cells scrolls with the table instead of breaking mid-path
+    code {
+      @apply whitespace-nowrap;
+    }
+  }
+
+  tr:last-child td {
+    @apply border-b-0;
+  }
+
+  tbody tr:nth-child(even) {
+    background: color-mix(in srgb, var(--base-200) 50%, transparent);
+  }
+
+  // Media and separators
+  img {
+    @apply rounded-lg border border-base-100 max-w-full h-auto;
+  }
+
+  hr {
+    @apply my-10 border-base-100;
+  }
+
+  // GFM footnotes
+  sup a {
+    @apply no-underline text-xs px-0.5;
+  }
+
+  .footnotes {
+    @apply mt-12 pt-6 border-t border-base-100 text-sm;
+
+    ol {
+      @apply mt-0;
+    }
+  }
+}

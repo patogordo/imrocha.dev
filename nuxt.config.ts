@@ -25,6 +25,15 @@ export default defineNuxtConfig({
   // node:sqlite (Node 22.5+) instead of installing better-sqlite3
   content: {
     experimental: { sqliteConnector: "native" },
+    build: {
+      markdown: {
+        // Same palette as the site (base-100/200/300 come from GitHub Dark Dimmed)
+        highlight: {
+          theme: "github-dark-dimmed",
+          langs: ["ts", "js", "json", "bash", "vue", "dockerfile", "yaml"],
+        },
+      },
+    },
   },
   icon: {
     clientBundle: {
@@ -41,6 +50,7 @@ export default defineNuxtConfig({
     families: [
       { name: "Inter", provider: "google" },
       { name: "Russo One", provider: "google" },
+      { name: "JetBrains Mono", provider: "google" },
     ],
   },
   i18n: {

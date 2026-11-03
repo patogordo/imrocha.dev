@@ -11,9 +11,3 @@
     <slot />
   </main>
 </template>
-
-<style lang="scss">
-.content-page {
-  @apply w-full flex flex-col items-start justify-start gap-6;
-}
-</style>
