@@ -1,35 +1,30 @@
 // "Export PDF" on blog posts uses the browser's print dialog.
 // Light theme on paper; code blocks keep the dark theme so syntax colors stay readable.
+// The same rules apply under @media print (Ctrl+P) and under html.printing, a class the
+// export button sets before printing, so the result doesn't depend on how each browser
+// resolves print media.
 
-@media print {
-  @page {
-    margin: 16mm 14mm;
-  }
-
-  :root {
+@mixin paper($root) {
+  #{$root} {
     --text-color: #24292f;
     --base-100: #d0d7de;
     --base-200: #f6f8fa;
     --base-300: #ffffff;
   }
 
-  * {
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
+  #{$root} :is(main > section:first-child, .print\:hidden, .toc, .code-block-copy) {
+    display: none !important;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  strong,
-  th {
+  #{$root} main {
+    padding: 0 !important;
+  }
+
+  #{$root} :is(h1, h2, h3, h4, h5, h6, strong, th) {
     color: #111 !important;
   }
 
-  .prose-content {
+  #{$root} .prose-content {
     a:not(.code-block-copy) {
       @apply text-primary-800 decoration-primary-700;
     }
@@ -54,15 +49,10 @@
     .code-block-header {
       background: #2d333b;
       border-color: #393f46;
-      color: #b0b4d0;
 
       > span {
         color: #b0b4d0;
       }
-    }
-
-    .code-block-copy {
-      display: none;
     }
 
     // Paper has no horizontal scroll: wrap long lines instead of cutting them
@@ -82,8 +72,27 @@
       break-inside: avoid;
     }
 
-    :is(h1, h2, h3, h4, h5, h6) > a::before {
-      display: none;
+    :is(h1, h2, h3, h4, h5, h6) > a {
+      color: #111 !important;
+
+      &::before {
+        display: none;
+      }
     }
   }
+}
+
+@include paper("html.printing");
+
+@media print {
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  @include paper(":root");
 }

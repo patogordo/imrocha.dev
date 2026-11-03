@@ -32,8 +32,15 @@ const copyMarkdown = () =>
     `# ${page.value?.title}\n\n${(page.value?.rawbody ?? "").replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, "")}`,
   );
 
-// Print styles (assets/scss) turn the page into a clean document; "Save as PDF" does the rest
-const exportPdf = () => window.print();
+// assets/scss/print.scss turns the page into a light document while html.printing is set;
+// "Save as PDF" in the print dialog does the rest
+const exportPdf = () => {
+  const html = document.documentElement;
+  html.classList.add("printing");
+  window.addEventListener("afterprint", () => html.classList.remove("printing"), { once: true });
+  // Two frames so the light theme is painted before the browser takes the print snapshot
+  requestAnimationFrame(() => requestAnimationFrame(() => window.print()));
+};
 </script>
 
 <template>
