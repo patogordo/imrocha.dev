@@ -4,13 +4,13 @@
       "description": {
         "a-k-a": "conhecido como",
         "my-name-is": "Meu nome é",
-        "text": "sou um Engenheiro de Software e atualmente trabalho no mercado financeiro brasileiro, desenvolvendo e mantendo aplicativos para máquinas de cartão de crédito, bancos digitais, portais de venda e outros softwares demandados pelo setor."
+        "text": "sou um Engenheiro de Software e atualmente trabalho com fintech e meios de pagamento no Brasil, desenvolvendo e mantendo aplicativos para máquinas de cartão de crédito, bancos digitais, portais de venda e outros softwares do setor."
       },
       "title": "Quem sou?"
     },
     "knowledge-and-experience": {
       "description": {
-        "education-and-experience-details": "e hoje atuo como Diretor de Tecnologia na AltPay e como Engenheiro de Software na B91, no mercado de meios de pagamento. No dia a dia uso JavaScript/TypeScript com NestJS, Nitro, Vue, Nuxt, React e Next.js, bancos como PostgreSQL, MySQL e MongoDB, e desenvolvo apps Android nativos para máquinas de cartão com Kotlin e Jetpack Compose.",
+        "education-and-experience-details": "e hoje atuo como Diretor de Tecnologia na AltPay e como Engenheiro de Software na B91, em fintech e meios de pagamento. No dia a dia uso JavaScript/TypeScript com NestJS, Nitro, Vue, Nuxt, React e Next.js, bancos como PostgreSQL, MySQL e MongoDB, e desenvolvo apps Android nativos para máquinas de cartão com Kotlin e Jetpack Compose.",
         "education-and-experience-intro": "Eu estou me graduando em Engenharia de Software na"
       },
       "title": "Conhecimento e Experiência"
@@ -24,7 +24,7 @@
   },
   "profile": {
     "contact-me": "Contate me",
-    "details": "um Desenvolvedor de Software. Transformo desafios em soluções tecnológicas, sempre inovando e aprendendo no processo.",
+    "details": "um Engenheiro de Software em fintech e meios de pagamento. Transformo desafios em soluções tecnológicas, sempre inovando e aprendendo no processo.",
     "hello-i-am": {
       "title": "Olá, sou"
     },
@@ -104,7 +104,7 @@
       "title": "Mobile"
     },
     "payments": {
-      "title": "Meios de Pagamento"
+      "title": "Fintech e Meios de Pagamento"
     },
     "miscellaneous": {
       "title": "Diversos"

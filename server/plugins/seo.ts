@@ -31,7 +31,7 @@ const TEXT = {
   pt: {
     title: "Ícaro Rocha (Pato) · Engenheiro de Software",
     description:
-      "Engenheiro de software no mercado de meios de pagamento. Back-end com Node.js e NestJS, front-end com Vue e Nuxt e apps Android com Kotlin. Veja meus projetos.",
+      "Engenheiro de software em fintech e meios de pagamento. Back-end com Node.js e NestJS, front-end com Vue e Nuxt e apps Android com Kotlin. Veja meus projetos.",
     jobTitle: "Engenheiro de Software",
     blogTitle: "Blog · Ícaro Rocha",
     blogDescription:
@@ -41,7 +41,7 @@ const TEXT = {
   en: {
     title: "Ícaro Rocha (Pato) · Software Engineer",
     description:
-      "Software engineer working in payments. Back end with Node.js and NestJS, front end with Vue and Nuxt, and Android apps with Kotlin. Check out my projects.",
+      "Software engineer in fintech and payments. Back end with Node.js and NestJS, front end with Vue and Nuxt, and Android apps with Kotlin. Check out my projects.",
     jobTitle: "Software Engineer",
     blogTitle: "Blog · Ícaro Rocha",
     blogDescription:
