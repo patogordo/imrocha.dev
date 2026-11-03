@@ -54,15 +54,16 @@ const items = computed(() => [
     sourceCode: "https://github.com/gbreath",
     livePreview: "https://beta-gbreath.netlify.app",
   },
-  {
-    name: "RocketLaunches",
-    imgUrl: "/images/rocketlaunches-preview.png",
-    iconUrl: "/images/rocketlaunches-icon.png",
-    description: t("projects.rocketlaunches.description"),
-    languages: ["en"],
-    sourceCode: "https://github.com/rocket-launches",
-    livePreview: "https://rocketlaunches.app",
-  },
+  // Hidden for now, uncomment to show it again
+  // {
+  //   name: "RocketLaunches",
+  //   imgUrl: "/images/rocketlaunches-preview.png",
+  //   iconUrl: "/images/rocketlaunches-icon.png",
+  //   description: t("projects.rocketlaunches.description"),
+  //   languages: ["en"],
+  //   sourceCode: "https://github.com/rocket-launches",
+  //   livePreview: "https://rocketlaunches.app",
+  // },
 ]);
 </script>
 
