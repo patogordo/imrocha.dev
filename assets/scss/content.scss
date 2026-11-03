@@ -7,6 +7,8 @@
   --code-bg: #1c2128;
 
   @apply w-full text-[1rem] leading-7;
+  // Long words, URLs and inline code break instead of widening the page on phones
+  overflow-wrap: anywhere;
 
   > * + * {
     @apply mt-5;
@@ -220,6 +222,7 @@
 
   table {
     @apply w-full text-sm text-left border-collapse;
+    overflow-wrap: normal; // tables scroll inside their frame instead
   }
 
   th {
