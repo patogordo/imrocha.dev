@@ -141,6 +141,12 @@
     "written-in-pt": "Escrito em português",
     "copy": "Copiar",
     "copied": "Copiado",
-    "toc": "Nesta página"
+    "toc": "Nesta página",
+    "copy-markdown": "Copiar Markdown",
+    "copied-markdown": "Markdown copiado",
+    "export-pdf": "Exportar PDF",
+    "all-posts": "Todos os posts",
+    "tag-title": "Posts com a tag",
+    "tag-count": "Nenhum post com essa tag. | 1 post, do mais recente para o mais antigo. | {count} posts, do mais recente para o mais antigo."
   }
 }

@@ -1,0 +1,89 @@
+// "Export PDF" on blog posts uses the browser's print dialog.
+// Light theme on paper; code blocks keep the dark theme so syntax colors stay readable.
+
+@media print {
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  :root {
+    --text-color: #24292f;
+    --base-100: #d0d7de;
+    --base-200: #f6f8fa;
+    --base-300: #ffffff;
+  }
+
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong,
+  th {
+    color: #111 !important;
+  }
+
+  .prose-content {
+    a:not(.code-block-copy) {
+      @apply text-primary-800 decoration-primary-700;
+    }
+
+    :not(pre) > code {
+      @apply text-secondary-700;
+    }
+
+    blockquote p {
+      color: #444;
+    }
+
+    .callout {
+      break-inside: avoid;
+
+      .callout-title,
+      .callout-title * {
+        color: color-mix(in srgb, var(--tone) 55%, #000);
+      }
+    }
+
+    .code-block-header {
+      background: #2d333b;
+      border-color: #393f46;
+      color: #b0b4d0;
+
+      > span {
+        color: #b0b4d0;
+      }
+    }
+
+    .code-block-copy {
+      display: none;
+    }
+
+    // Paper has no horizontal scroll: wrap long lines instead of cutting them
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    h2,
+    h3,
+    h4 {
+      break-after: avoid;
+    }
+
+    tr,
+    img {
+      break-inside: avoid;
+    }
+
+    :is(h1, h2, h3, h4, h5, h6) > a::before {
+      display: none;
+    }
+  }
+}

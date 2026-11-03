@@ -31,7 +31,7 @@ useEventListener("scroll", updateActive, { passive: true });
 <template>
   <nav
     v-if="items.length > 1"
-    class="toc group fixed right-6 top-32 z-30 max-lg:hidden"
+    class="toc group fixed right-6 top-32 z-30 max-lg:hidden print:hidden"
     :aria-label="$t('blog.toc')"
   >
     <ul class="flex flex-col items-end py-2" aria-hidden="true">

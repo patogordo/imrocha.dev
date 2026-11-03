@@ -67,6 +67,18 @@ async function buildSeo(event: H3Event): Promise<Seo> {
   const text = TEXT[lang];
   const path = getRequestURL(event).pathname.replace(/\/+$/, "") || "/";
 
+  if (path.startsWith("/blog/tags/")) {
+    const tag = decodeURIComponent(path.slice("/blog/tags/".length));
+    return {
+      lang,
+      title: `#${tag} · ${text.blogTitle}`,
+      description: lang === "pt" ? `Posts com a tag ${tag}.` : `Posts tagged ${tag}.`,
+      path,
+      type: "website",
+      jsonLd: { "@context": "https://schema.org", "@type": "CollectionPage", name: `#${tag}`, url: `${SITE}${path}` },
+    };
+  }
+
   if (path.startsWith("/blog/")) {
     const post = await queryCollection(event, "content")
       .path(path)

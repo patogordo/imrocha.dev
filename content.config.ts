@@ -8,6 +8,8 @@ export default defineContentConfig({
       schema: z.object({
         date: z.string().optional(),
         tags: z.array(z.string()).optional(),
+        // Original file content, used by the "Copy Markdown" button
+        rawbody: z.string(),
       }),
     }),
   },

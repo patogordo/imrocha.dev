@@ -17,7 +17,7 @@ const { copy, copied } = useClipboard({ copiedDuring: 2000 });
       <span>{{ props.filename || props.language || "text" }}</span>
       <button
         type="button"
-        class="code-block-copy"
+        class="code-block-copy print:hidden"
         :aria-label="$t(copied ? 'blog.copied' : 'blog.copy')"
         @click="copy(props.code)"
       >

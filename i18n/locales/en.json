@@ -141,6 +141,12 @@
     "written-in-pt": "Written in Portuguese",
     "copy": "Copy",
     "copied": "Copied",
-    "toc": "On this page"
+    "toc": "On this page",
+    "copy-markdown": "Copy Markdown",
+    "copied-markdown": "Markdown copied",
+    "export-pdf": "Export PDF",
+    "all-posts": "All posts",
+    "tag-title": "Posts tagged",
+    "tag-count": "No posts with this tag. | 1 post, newest first. | {count} posts, newest first."
   }
 }
