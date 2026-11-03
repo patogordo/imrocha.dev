@@ -12,7 +12,7 @@
       "title": "Knowledge and Experience",
       "description": {
         "education-and-experience-intro": "I'm graduating in Software Engineering at",
-        "education-and-experience-details": "and today I work as Technology Director at AltPay and as a Software Engineer at B91, in fintech and payments. Day to day I use JavaScript/TypeScript with NestJS, Nitro, Vue, Nuxt, React and Next.js, databases like PostgreSQL, MySQL and MongoDB, and I build native Android apps for card terminals with Kotlin and Jetpack Compose."
+        "education-and-experience-details": "and today I work as Technology Director at AltPay, in fintech and payments. Day to day I use JavaScript/TypeScript with NestJS, Nitro, Vue, Nuxt, React and Next.js, databases like PostgreSQL, MySQL and MongoDB, and I build native Android apps for card terminals with Kotlin and Jetpack Compose."
       }
     }
   },
@@ -127,8 +127,6 @@
     "see-more": "See more on LinkedIn",
     "roles": {
       "cto": "Technology Director",
-      "engineer": "Software Engineer",
-      "developer": "Software Developer",
       "intern": "Software Developer Intern"
     }
   },

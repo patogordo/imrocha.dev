@@ -1,9 +1,17 @@
 ---
 title: "APIs escaláveis com Nitro"
-description: "Como eu organizo uma API em Nitro para ela crescer sem virar bagunça e aguentar mais tráfego: rotas por arquivo, validação, cache no Redis e deploy em cluster."
+description: "Como eu organizo uma API em Nitro para ela crescer sem virar bagunça e aguentar mais tráfego: rotas por arquivo, validação, ports and adapters, cache no Redis e deploy em cluster."
 date: "2026-11-02"
-tags: [nitro, backend, nodejs, typescript]
+tags: [nitro, backend, nodejs, typescript, arquitetura]
 ---
+
+::alert{type="success" title="TL;DR"}
+- Rotas por arquivo, e tudo que vem de fora passa por um schema do Zod.
+- Uma conexão com o banco por instância, aberta uma vez só.
+- Serviços externos (e-mail, pagamento) ficam atrás de *ports and adapters*. Trocar de provedor, ou rodar dois ao mesmo tempo numa migração, não mexe nas rotas.
+- Cache com `swr` antes de pensar em mais máquinas, e no Redis quando tiver mais de uma.
+- Nada importante na memória do processo. Depois disso, é `node_cluster`, Docker ou serverless.
+::
 
 O Nitro é o servidor que roda por baixo do Nuxt, mas dá para usar ele sozinho, sem front nenhum. Uso no back-end do Flaggle Versus e do Easy Finance, e foi a primeira vez que montei uma API em Node sem sentir falta do Express ou do Nest.
 
@@ -61,7 +69,10 @@ export default defineEventHandler(async (event) => {
   const user = await db.collection("users").findOne({ id });
 
   if (!user) {
-    throw createError({ statusCode: 404, statusMessage: "Usuário não encontrado" });
+    throw createError({
+      statusCode: 404,
+      statusMessage: "Usuário não encontrado",
+    });
   }
 
   return user;
@@ -106,7 +117,8 @@ import { MongoClient } from "mongodb";
 let connecting: Promise<MongoClient> | undefined;
 
 export async function useDb() {
-  // Guarda a promise, não o client: duas requisições no cold start não abrem duas conexões
+  // Guarda a promise, não o client: duas requisições no cold start
+  // não abrem duas conexões
   connecting ??= new MongoClient(useRuntimeConfig().mongoUrl)
     .connect()
     .catch((err) => {
@@ -143,6 +155,135 @@ export default defineNitroPlugin((nitroApp) => {
 });
 ```
 
+## Ports and adapters para serviços externos
+
+Toda API acaba falando com serviços de fora: e-mail, SMS, banco, gateway de pagamento. Se a rota chama o SDK do provedor direto, trocar de provedor vira uma caça a imports pelo projeto inteiro. Na API de pagamentos em que trabalho hoje, resolvi isso com *ports and adapters*, também chamado de arquitetura hexagonal. A aplicação conhece só uma interface, a **porta**, e cada provedor é um **adaptador** que implementa essa interface.
+
+```text
+server/
+├── services/
+│   ├── mail/
+│   │   ├── mail.port.ts
+│   │   └── adapters/       # mailjet.ts, nodemailer.ts...
+│   └── payments/
+│       ├── payments.port.ts
+│       └── adapters/       # um arquivo por banco
+└── utils/
+    ├── mail.ts             # escolhe o adaptador de e-mail
+    └── payments.ts         # escolhe o adaptador de pagamento
+```
+
+No e-mail, a porta é pequena e a escolha do adaptador vem de uma variável de ambiente. Lá eu tenho três provedores de e-mail, e trocar de um para outro é só mudar o `NITRO_MAIL_PROVIDER`:
+
+```ts [server/services/mail/mail.port.ts]
+export interface MailPort {
+  send(data: { to: string; subject: string; html: string }): Promise<void>;
+}
+```
+
+```ts [server/utils/mail.ts]
+import { mailjetAdapter } from "~/services/mail/adapters/mailjet";
+import { nodemailerAdapter } from "~/services/mail/adapters/nodemailer";
+import type { MailPort } from "~/services/mail/mail.port";
+
+const adapters: Record<string, MailPort> = {
+  mailjet: mailjetAdapter,
+  nodemailer: nodemailerAdapter,
+};
+
+export function useMail(): MailPort {
+  return adapters[useRuntimeConfig().mailProvider] ?? nodemailerAdapter;
+}
+```
+
+A rota chama `useMail().send(...)` e não sabe quem está do outro lado. Nos testes entra um adaptador falso que guarda os e-mails num array, sem mandar nada para lugar nenhum.
+
+### Pagamentos: dois provedores ao mesmo tempo
+
+É no pagamento que esse formato mais compensa. Migrar de banco não acontece num dia: pagamento antigo ainda precisa ser consultado e estornado onde foi criado, enquanto os novos já podem ir para o provedor novo. Como a aplicação só conhece a porta, os dois adaptadores podem ficar ligados juntos durante a migração.
+
+```ts [server/services/payments/payments.port.ts]
+export interface PaymentsPort {
+  readonly name: string;
+  sendPayment(data: NewPayment): Promise<{ id: string }>;
+  refund(paymentId: string): Promise<void>;
+}
+
+export type NewPayment = {
+  document: string;
+  amount: number; // em centavos
+  description: string;
+};
+```
+
+Um jeito simples de dividir o tráfego é por cliente, com uma porcentagem que vai subindo aos poucos:
+
+```ts [server/utils/payments.ts]
+import { createHash } from "node:crypto";
+import { oldBankAdapter } from "~/services/payments/adapters/old-bank";
+import { newBankAdapter } from "~/services/payments/adapters/new-bank";
+import type { PaymentsPort } from "~/services/payments/payments.port";
+
+const adapters: Record<string, PaymentsPort> = {
+  [oldBankAdapter.name]: oldBankAdapter,
+  [newBankAdapter.name]: newBankAdapter,
+};
+
+// Pagamento novo
+export function paymentsForCustomer(document: string): PaymentsPort {
+  // NITRO_NEW_BANK_SHARE: de 0 a 100, sobe aos poucos
+  const share = Number(useRuntimeConfig().newBankShare);
+  // O mesmo cliente cai sempre no mesmo banco durante a migração
+  const hash = createHash("sha256").update(document).digest("hex");
+  const bucket = parseInt(hash.slice(0, 8), 16) % 100;
+  return bucket < share ? newBankAdapter : oldBankAdapter;
+}
+
+// Pagamento que já existe: sempre o provedor que criou
+export function paymentsByName(name: string): PaymentsPort {
+  const adapter = adapters[name];
+  if (!adapter) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: `Provedor desconhecido: ${name}`,
+    });
+  }
+  return adapter;
+}
+```
+
+```ts [server/routes/payments/index.post.ts]
+import { z } from "zod";
+
+const schema = z.object({
+  document: z.string().regex(/^\d{11}$|^\d{14}$/),
+  amount: z.number().int().positive(), // em centavos
+  description: z.string().max(140),
+});
+
+export default defineEventHandler(async (event) => {
+  const body = await readValidatedBody(event, schema.parse);
+  const provider = paymentsForCustomer(body.document);
+  const { id } = await provider.sendPayment(body);
+
+  const db = await useDb();
+  await db.collection("payments").insertOne({
+    ...body,
+    providerId: id,
+    provider: provider.name,
+  });
+
+  setResponseStatus(event, 201);
+  return { id };
+});
+```
+
+O detalhe que faz isso funcionar é gravar `provider` junto com o pagamento. No estorno, a rota busca o pagamento no banco e chama `paymentsByName(payment.provider).refund(payment.providerId)`, então cada pagamento volta para o lugar de onde saiu. Quando a migração termina, é colocar `NITRO_NEW_BANK_SHARE=100` e, depois que o último pagamento antigo não precisar mais de nada, apagar o adaptador velho.
+
+::alert{type="info" title="Sem mexer nas rotas"}
+Nada disso tocou nas rotas que já existiam. A migração inteira acontece em `utils/payments.ts` e numa variável de ambiente, e voltar atrás é baixar a porcentagem.
+::
+
 ## Middleware
 
 Arquivos em `server/middleware/` rodam antes de qualquer rota, em ordem alfabética. Uso para o que vale para todas as requisições, como colocar um id em cada uma para conseguir seguir ela nos logs:
@@ -166,7 +307,12 @@ Antes de subir mais instâncias, vale olhar quais rotas devolvem quase sempre a 
 export default defineCachedEventHandler(
   async () => {
     const db = await useDb();
-    return db.collection("scores").find().sort({ score: -1 }).limit(50).toArray();
+    return db
+      .collection("scores")
+      .find()
+      .sort({ score: -1 })
+      .limit(50)
+      .toArray();
   },
   { name: "ranking", maxAge: 60, swr: true },
 );
@@ -250,13 +396,6 @@ CMD ["node", ".output/server/index.mjs"]
 ---
 
 ## Fechando
-
-1. Rotas por arquivo deixam o projeto organizado sem esforço.
-2. Tudo que vem de fora passa por um schema.
-3. Uma conexão com o banco por instância.
-4. Cache com `swr` antes de pensar em mais máquinas, e no Redis quando tiver mais de uma.
-5. Nenhum estado importante na memória do processo.
-6. O preset certo para onde a API vai rodar.
 
 A [documentação do Nitro](https://nitro.build) é curta e vale a leitura inteira. O back-end do [Flaggle Versus](https://flaggle-versus.vercel.app) segue esse formato, com rotas por arquivo, utils e plugins. Se ficou alguma dúvida, me chama pelo [formulário de contato](/#contact-me).
 

@@ -4,8 +4,6 @@ const { locale } = useI18n();
 // Kept short on purpose, the full history lives on LinkedIn
 const jobs = [
   { role: "cto", company: "AltPay", start: "2025-05" },
-  { role: "engineer", company: "B91", start: "2026-03" },
-  { role: "developer", company: "B91", start: "2022-08", end: "2025-04" },
   { role: "intern", company: "BlackPay", start: "2022-08", end: "2023-02" },
 ];
 
