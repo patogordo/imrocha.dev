@@ -20,6 +20,27 @@
     padding: 0 !important;
   }
 
+  // Markdown editor: print only the preview, at full length
+  #{$root} .editor {
+    left: 0 !important;
+    transform: none !important;
+    width: auto !important;
+    max-width: none !important;
+
+    > .grid {
+      display: block !important;
+      margin-top: 0 !important;
+    }
+  }
+
+  #{$root} .editor-preview {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
   #{$root} :is(h1, h2, h3, h4, h5, h6, strong, th) {
     color: #111 !important;
   }

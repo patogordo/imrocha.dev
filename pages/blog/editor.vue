@@ -1,7 +1,22 @@
 <script lang="ts" setup>
 import type { MDCParserResult } from "@nuxtjs/mdc";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import sample from "~/config/editor-sample.md?raw";
-import aiInstructions from "~/config/ai-writing-instructions.md?raw";
+import aiBase from "~/config/ai-instructions/base.md?raw";
+import firstPerson from "~/config/ai-instructions/voices/first-person.md?raw";
+import story from "~/config/ai-instructions/voices/story.md?raw";
+import descriptive from "~/config/ai-instructions/voices/descriptive.md?raw";
+import publicReport from "~/config/ai-instructions/voices/public-report.md?raw";
+import tutorial from "~/config/ai-instructions/voices/tutorial.md?raw";
+
+// Shared format rules + one voice section each
+const voices = [
+  { id: "first-person", text: firstPerson },
+  { id: "story", text: story },
+  { id: "descriptive", text: descriptive },
+  { id: "public-report", text: publicReport },
+  { id: "tutorial", text: tutorial },
+] as const;
 
 const { t, locale } = useI18n();
 useHead({ title: () => `${t("editor.title")} · Ícaro Rocha` });
@@ -63,8 +78,15 @@ const tags = computed(() =>
   Array.isArray(parsed.value?.data?.tags) ? (parsed.value.data.tags as string[]) : [],
 );
 
+// shortcut: counts fence lines only, a 4-backtick block that shows ``` inside would trip it
+const unclosedFence = computed(
+  () => (source.value.match(/^ {0,3}(`{3,}|~{3,})/gm)?.length ?? 0) % 2 === 1,
+);
+
 const markdownClipboard = useClipboard({ copiedDuring: 2000, legacy: true });
 const aiClipboard = useClipboard({ copiedDuring: 2000, legacy: true });
+const copyInstructions = (voice: (typeof voices)[number]) =>
+  aiClipboard.copy(aiBase.replace("{{VOZ}}", voice.text.trim()));
 
 const resetToSample = () => {
   if (source.value === sample || window.confirm(t("editor.reset-confirm"))) {
@@ -76,9 +98,9 @@ const resetToSample = () => {
 <template>
   <!-- Wider than the rest of the site: breaks out of the layout padding -->
   <section
-    class="relative left-1/2 -translate-x-1/2 w-[calc(100vw-4rem)] max-w-[1600px]"
+    class="editor relative left-1/2 -translate-x-1/2 w-[calc(100vw-4rem)] max-w-[1600px]"
   >
-    <div class="flex flex-wrap items-end justify-between gap-4">
+    <div class="print:hidden">
       <div>
         <nuxt-link
           to="/blog"
@@ -91,7 +113,7 @@ const resetToSample = () => {
         <p>{{ $t("editor.description") }}</p>
       </div>
 
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-2 mt-4">
         <button
           type="button"
           class="editor-action"
@@ -109,16 +131,43 @@ const resetToSample = () => {
             )
           }}
         </button>
+        <Menu as="div" class="relative">
+          <MenuButton class="editor-action !border-primary-700">
+            <Icon
+              :name="aiClipboard.copied.value ? 'tabler:check' : 'tabler:sparkles'"
+              size="18"
+            />
+            {{ $t(aiClipboard.copied.value ? "editor.copied-ai" : "editor.copy-ai") }}
+            <Icon name="tabler:chevron-down" size="16" />
+          </MenuButton>
+          <MenuItems
+            class="absolute z-40 mt-2 w-80 max-w-[calc(100vw-4rem)] p-2 bg-base-200 border border-base-100 rounded-lg shadow-xl shadow-black/30 focus:outline-none left-0"
+          >
+            <p class="px-3 pt-1 pb-2 text-xs">{{ $t("editor.voice-hint") }}</p>
+            <MenuItem v-for="voice in voices" :key="voice.id" v-slot="{ active }">
+              <button
+                type="button"
+                class="w-full px-3 py-2 text-left rounded-md transition-colors"
+                :class="active ? 'bg-base-100' : ''"
+                @click="copyInstructions(voice)"
+              >
+                <span class="block text-sm font-semibold !text-white">
+                  {{ $t(`editor.voices.${voice.id}.name`) }}
+                </span>
+                <span class="block text-xs mt-0.5">
+                  {{ $t(`editor.voices.${voice.id}.hint`) }}
+                </span>
+              </button>
+            </MenuItem>
+          </MenuItems>
+        </Menu>
         <button
           type="button"
-          class="editor-action !border-primary-700"
-          @click="aiClipboard.copy(aiInstructions)"
+          class="editor-action"
+          @click="exportPdf(parsed?.data?.title ? String(parsed.data.title) : undefined)"
         >
-          <Icon
-            :name="aiClipboard.copied.value ? 'tabler:check' : 'tabler:sparkles'"
-            size="18"
-          />
-          {{ $t(aiClipboard.copied.value ? "editor.copied-ai" : "editor.copy-ai") }}
+          <Icon name="tabler:file-type-pdf" size="18" />
+          {{ $t("blog.export-pdf") }}
         </button>
         <button type="button" class="editor-action" @click="resetToSample">
           <Icon name="tabler:restore" size="18" />
@@ -127,7 +176,7 @@ const resetToSample = () => {
       </div>
     </div>
 
-    <div class="flex gap-2 mt-6 lg:hidden" role="tablist">
+    <div class="flex gap-2 mt-6 lg:hidden print:hidden" role="tablist">
       <button
         v-for="name in ['write', 'preview'] as const"
         :key="name"
@@ -147,26 +196,32 @@ const resetToSample = () => {
     </div>
 
     <div class="grid lg:grid-cols-2 gap-6 mt-6">
-      <label :class="tab === 'preview' ? 'max-lg:hidden' : ''">
+      <label class="print:hidden" :class="tab === 'preview' ? 'max-lg:hidden' : ''">
         <span class="sr-only">{{ $t("editor.write") }}</span>
         <textarea
           v-model="source"
           spellcheck="false"
           :placeholder="$t('editor.placeholder')"
-          class="editor-input w-full h-[70vh] lg:h-[calc(100vh-21rem)] p-4 text-sm leading-6 rounded-lg border border-base-100 resize-none outline-none transition-colors focus:border-primary-500"
+          class="editor-input w-full h-[70vh] lg:h-[calc(100vh-24rem)] p-4 text-sm leading-6 rounded-lg border border-base-100 resize-none outline-none transition-colors focus:border-primary-500"
         />
       </label>
 
       <div
-        class="relative h-[70vh] lg:h-[calc(100vh-21rem)] overflow-y-auto p-6 bg-base-300 border border-base-100 rounded-lg"
+        class="editor-preview relative h-[70vh] lg:h-[calc(100vh-24rem)] overflow-y-auto p-6 bg-base-300 border border-base-100 rounded-lg"
         :class="tab === 'write' ? 'max-lg:hidden' : ''"
         aria-live="polite"
       >
         <p
           v-if="parseError"
-          class="mb-4 px-3 py-2 text-sm rounded-md border border-warning-500 !text-warning-400"
+          class="mb-4 px-3 py-2 text-sm rounded-md border border-warning-500 !text-warning-400 print:hidden"
         >
           {{ $t("editor.parse-error") }}
+        </p>
+        <p
+          v-if="unclosedFence"
+          class="mb-4 px-3 py-2 text-sm rounded-md border border-warning-500 !text-warning-400 print:hidden"
+        >
+          {{ $t("editor.unclosed-fence") }}
         </p>
 
         <h1

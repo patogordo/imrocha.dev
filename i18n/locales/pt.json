@@ -161,6 +161,30 @@
     "reset-confirm": "Trocar o rascunho atual pelo exemplo? O texto atual vai ser perdido.",
     "parse-error": "Não deu para ler o frontmatter. Confira a sintaxe entre os dois ---.",
     "empty": "Escreva algo à esquerda para ver a prévia.",
-    "placeholder": "Escreva seu post em Markdown..."
+    "placeholder": "Escreva seu post em Markdown...",
+    "voice-hint": "Escolha a voz do texto. As regras de formato vão junto em todas.",
+    "unclosed-fence": "Tem um bloco de código sem fechamento. Cada bloco precisa de uma linha com ``` no fim, antes do texto seguinte.",
+    "voices": {
+      "first-person": {
+        "name": "Primeira pessoa",
+        "hint": "Eu fiz, eu decidi. Com opinião e bastidores."
+      },
+      "story": {
+        "name": "Relato de experiência",
+        "hint": "Ao fazer isso, encontrei aquilo. Em ordem cronológica."
+      },
+      "descriptive": {
+        "name": "Descritivo",
+        "hint": "Foi encontrado, foi corrigido. Impessoal e técnico."
+      },
+      "public-report": {
+        "name": "Relatório público",
+        "hint": "Auditoria, pen test ou incidente. Linguagem simples, sem detalhes sensíveis."
+      },
+      "tutorial": {
+        "name": "Tutorial",
+        "hint": "Passo a passo, falando com o leitor."
+      }
+    }
   }
 }

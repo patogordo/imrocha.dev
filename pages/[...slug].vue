@@ -31,16 +31,6 @@ const copyMarkdown = () =>
   copy(
     `# ${page.value?.title}\n\n${(page.value?.rawbody ?? "").replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, "")}`,
   );
-
-// assets/scss/print.scss turns the page into a light document while html.printing is set;
-// "Save as PDF" in the print dialog does the rest
-const exportPdf = () => {
-  const html = document.documentElement;
-  html.classList.add("printing");
-  window.addEventListener("afterprint", () => html.classList.remove("printing"), { once: true });
-  // Two frames so the light theme is painted before the browser takes the print snapshot
-  requestAnimationFrame(() => requestAnimationFrame(() => window.print()));
-};
 </script>
 
 <template>
@@ -71,7 +61,7 @@ const exportPdf = () => {
         <Icon :name="copied ? 'tabler:check' : 'tabler:markdown'" size="18" />
         {{ $t(copied ? "blog.copied-markdown" : "blog.copy-markdown") }}
       </button>
-      <button type="button" class="post-action" @click="exportPdf">
+      <button type="button" class="post-action" @click="exportPdf()">
         <Icon name="tabler:file-type-pdf" size="18" />
         {{ $t("blog.export-pdf") }}
       </button>

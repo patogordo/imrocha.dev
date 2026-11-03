@@ -1,6 +1,35 @@
 # Instruções para escrever um post de blog
 
-Você vai escrever um post para um blog técnico. Responda só com o arquivo Markdown completo, dentro de um bloco de código `md`, pronto para colar no editor do blog. Nada de texto antes ou depois do bloco.
+Você vai escrever um post para um blog técnico. O resultado é um arquivo Markdown que vai ser colado no editor do blog.
+
+## Como entregar
+
+Responda só com o arquivo, dentro de um único bloco cercado por **quatro crases** e marcado como `md`. Nada de texto antes ou depois.
+
+`````text
+````md
+---
+title: "..."
+---
+
+Um parágrafo.
+
+```ts [arquivo.ts]
+const exemplo = true;
+```
+
+Outro parágrafo.
+
+```bash
+npm run dev
+```
+````
+`````
+
+- O bloco de fora usa quatro crases para que os blocos de código do post, que usam três, não fechem ele antes da hora.
+- Feche cada bloco de código com ``` sozinho numa linha antes de voltar ao texto. Dois blocos com um parágrafo no meio são dois blocos, cada um com a sua abertura e o seu fechamento.
+- Nunca use quatro crases dentro do post.
+- Se a sua interface permitir, entregue também como arquivo `.md` para baixar.
 
 ## Antes de começar: instale a skill humanizer
 
@@ -13,7 +42,7 @@ Se você roda num agente com suporte a skills, instale antes de escrever:
 - Claude.ai ou Claude Desktop: baixe o repositório como ZIP (Code → Download ZIP) e envie como skill em Settings
 - Outros agentes (Gemini CLI, GitHub Copilot, Windsurf...): `npx skills add blader/humanizer --global --agent '*'`
 
-Escreva o post e depois passe o texto pela skill (`/humanizer`). Se não der para instalar, siga as regras da seção "Estilo" deste documento, que resumem a skill para pt-BR.
+Escreva o post e depois passe o texto pela skill (`/humanizer`). Se não der para instalar, siga as "Regras de escrita" deste documento, que resumem a skill para pt-BR.
 
 ## Formato do arquivo
 
@@ -72,16 +101,15 @@ export default defineEventHandler(() => {
 - `---` sozinho numa linha para separar a parte final, se precisar.
 - Não use HTML, emojis nem `#` (h1).
 
-## Estilo
+{{VOZ}}
 
-O texto segue a skill humanizer. O resumo para pt-BR:
+## Regras de escrita (humanizer)
 
-**Voz**
+Valem para qualquer voz. Se a seção de voz acima contradizer alguma regra deste documento, vale a seção de voz.
 
-- Primeira pessoa, como quem conta o que fez e o que aprendeu. O público são outros devs.
-- Tenha opinião quando couber ("eu prefiro X porque...") e admita o que não sabe ou o que deu errado.
 - Varie o ritmo: frases curtas misturadas com frases mais longas.
-- Detalhe concreto vale mais que frase bonita: números, nomes de arquivo, comandos, erros reais.
+- Detalhe concreto vale mais que frase genérica, dentro do que a voz escolhida permite.
+- Títulos em sentence case e sem ponto final.
 
 **Evite estas palavras e construções**
 
