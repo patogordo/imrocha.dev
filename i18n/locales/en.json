@@ -127,6 +127,8 @@
     "see-more": "See more on LinkedIn",
     "roles": {
       "cto": "Technology Director",
+      "engineer": "Software Engineer",
+      "developer": "Software Developer",
       "intern": "Software Developer Intern"
     }
   },
